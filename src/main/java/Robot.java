@@ -32,6 +32,14 @@ public class Robot implements ExecutesInstructions {
 
     public void forward() {
         orientation = getOrientation().forward(this);
+        // stop the processing of the current robot if it fells
+        if(!isValidCoordinate(getCoordinates())) {
+            throw new IllegalStateException("Robot fell of the Mars surface!");
+        }
+    }
+
+    private boolean isValidCoordinate(CartesianCoordinates coordinates) {
+        return coordinates.isInMarsSurface(this.surface);
     }
 
     @Override
