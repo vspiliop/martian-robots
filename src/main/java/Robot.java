@@ -33,4 +33,10 @@ public class Robot implements ExecutesInstructions {
     public void forward() {
         orientation = getOrientation().forward(this);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Robot is at (%s, %s), heading %s", coordinates.getX(), coordinates.getY(), orientation.getClass().getSimpleName().charAt(0));
+    }
+
 }
