@@ -1,5 +1,11 @@
 /**
- * Where the robot is heading to and how to move around based on where it is heading.
+ * Represents where the robot is heading to and how to move around based on where it is heading.
  */
-public class Orientation {
+public interface Orientation {
+
+    Orientation left();
+
+    Orientation right();
+
+    Orientation forward();
 }

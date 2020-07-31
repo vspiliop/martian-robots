@@ -1,3 +1,5 @@
+import java.util.function.Consumer;
+
 public interface ExecutesInstructions {
-    void execute(InstructionChain instructions);
+    void execute(Consumer<Robot> instructions);
 }
