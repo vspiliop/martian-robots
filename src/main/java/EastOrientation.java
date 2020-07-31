@@ -11,8 +11,7 @@ public class EastOrientation implements Orientation {
     }
 
     @Override
-    public Orientation forward(Robot robot) {
-        robot.getCoordinates().incrementAxisX();
-        return this;
+    public CartesianCoordinates forward(Robot robot) {
+        return robot.getCoordinates().incrementAxisX();
     }
 }

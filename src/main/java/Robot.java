@@ -2,10 +2,16 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
 import java.util.function.Consumer;
 
 @RequiredArgsConstructor
 public class Robot implements ExecutesInstructions {
+
+    /**
+     * This represents the internal comms between robots, when they are constructed.
+     */
+    static final private HashMap<CartesianCoordinates, Object> scent = new HashMap<>();
 
     @NonNull
     @Getter
@@ -31,11 +37,22 @@ public class Robot implements ExecutesInstructions {
     }
 
     public void forward() {
-        orientation = getOrientation().forward(this);
-        // stop the processing of the current robot if it fells
-        if(!isValidCoordinate(getCoordinates())) {
+        CartesianCoordinates newCoordinates = getOrientation().forward(this);
+
+        boolean isNextCoordinateValid = isValidCoordinate(newCoordinates);
+
+        // if next coord is not valid and a robot has fell from the same current coord, skip the current instruction
+        if(!isNextCoordinateValid && scent.containsKey(getCoordinates())) {
+            return;
+        }
+
+        if(!isNextCoordinateValid && !scent.containsKey(getCoordinates())) {
+            scent.put(getCoordinates(), null);
+            // stop the processing of the current robot if it falls
             throw new IllegalStateException("Robot fell of the Mars surface!");
         }
+
+        coordinates = newCoordinates;
     }
 
     private boolean isValidCoordinate(CartesianCoordinates coordinates) {

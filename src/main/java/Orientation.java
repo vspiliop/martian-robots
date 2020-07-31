@@ -7,5 +7,5 @@ public interface Orientation {
 
     Orientation right();
 
-    Orientation forward(Robot robot);
+    CartesianCoordinates forward(Robot robot);
 }

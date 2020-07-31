@@ -22,28 +22,25 @@ public class CartesianCoordinates {
         this.y = y;
     }
 
-    public void incrementAxisX() {
-        x++;
+    public CartesianCoordinates incrementAxisX() {
+        return new CartesianCoordinates(x + 1, y);
     }
 
-    public void incrementAxisY() {
-        y++;
+    public CartesianCoordinates incrementAxisY() {
+        return new CartesianCoordinates(x, y + 1);
     }
 
-    public void decrementAxisX() {
-        x--;
+    public CartesianCoordinates decrementAxisX() {
+        return new CartesianCoordinates(x - 1, y);
     }
 
-    public void decrementAxisY() {
-        y--;
+    public CartesianCoordinates decrementAxisY() {
+        return new CartesianCoordinates(x, y - 1);
     }
 
     public boolean isInMarsSurface(MarsSurface surface) {
-        if (x < surface.getLowerBound().getX() || x > surface.getUpperBound().getX()) {
-            return false;
-        }
-
-        if (y < surface.getLowerBound().getY() || y > surface.getUpperBound().getY()) {
+        if (x < surface.getLowerBound().getX() || x > surface.getUpperBound().getX()
+                || y < surface.getLowerBound().getY() || y > surface.getUpperBound().getY()) {
             return false;
         }
 
