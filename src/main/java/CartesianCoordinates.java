@@ -1,12 +1,17 @@
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
 
-@Data
+@EqualsAndHashCode
+@AllArgsConstructor
 public class CartesianCoordinates {
 
+    @Getter
     @NonNull
     private int x;
 
+    @Getter
     @NonNull
     private int y;
 
