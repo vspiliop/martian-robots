@@ -11,7 +11,8 @@ public class SouthOrientation implements Orientation {
     }
 
     @Override
-    public Orientation forward() {
-        return null;
+    public Orientation forward(Robot robot) {
+        robot.getCoordinates().decrementAxisY();
+        return this;
     }
 }

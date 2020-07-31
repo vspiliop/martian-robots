@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 public class Robot implements ExecutesInstructions {
 
     @NonNull
+    @Getter
     private CartesianCoordinates coordinates;
 
     private final MarsSurface surface;
@@ -27,5 +28,9 @@ public class Robot implements ExecutesInstructions {
 
     public void turnRight() {
         orientation = getOrientation().right();
+    }
+
+    public void forward() {
+        orientation = getOrientation().forward(this);
     }
 }

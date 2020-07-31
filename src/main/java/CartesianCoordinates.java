@@ -5,8 +5,24 @@ import lombok.NonNull;
 public class CartesianCoordinates {
 
     @NonNull
-    private int y;
+    private int x;
 
     @NonNull
-    private int x;
+    private int y;
+
+    public void incrementAxisX() {
+        x++;
+    }
+
+    public void incrementAxisY() {
+        y++;
+    }
+
+    public void decrementAxisX() {
+        x--;
+    }
+
+    public void decrementAxisY() {
+        y--;
+    }
 }
