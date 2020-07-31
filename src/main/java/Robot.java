@@ -24,4 +24,8 @@ public class Robot implements ExecutesInstructions {
     public void turnLeft() {
         orientation = getOrientation().left();
     }
+
+    public void turnRight() {
+        orientation = getOrientation().right();
+    }
 }

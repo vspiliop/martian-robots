@@ -7,7 +7,7 @@ public class NorthOrientation implements Orientation {
 
     @Override
     public Orientation right() {
-        return null;
+        return new EastOrientation();
     }
 
     @Override
