@@ -23,7 +23,7 @@ public class MarsSurface {
         this.upperBound = Optional.ofNullable(upperBound).orElseThrow(() -> new IllegalArgumentException("Mars Surface must have an upper bound"));
     }
 
-    public boolean detectScent(CartesianCoordinates coordinates) {
+    public boolean hasScent(CartesianCoordinates coordinates) {
         return scent.containsKey(coordinates);
     }
 

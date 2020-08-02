@@ -38,7 +38,7 @@ public class CartesianCoordinates {
         return new CartesianCoordinates(x, y - 1);
     }
 
-    public boolean isInMarsSurface(MarsSurface surface) {
+    public boolean isOnMarsSurface(MarsSurface surface) {
         if (x < surface.getLowerBound().getX() || x > surface.getUpperBound().getX()
                 || y < surface.getLowerBound().getY() || y > surface.getUpperBound().getY()) {
             return false;
