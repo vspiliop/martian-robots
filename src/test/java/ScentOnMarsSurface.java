@@ -1,7 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 
-public class RobotsLeaveScentOnMarsSurface extends TestsCommonSetupOperations{
+public class ScentOnMarsSurface extends TestsCommonSetupOperations{
 
     @Test
     public void shouldHaveScent() {

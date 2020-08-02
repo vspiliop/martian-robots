@@ -7,6 +7,12 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public class Robot implements ExecutesInstructions {
 
+    enum Status {
+        LOST, ALIVE
+    }
+
+    Status status = Status.ALIVE;
+
     @NonNull
     @Getter
     private CartesianCoordinates coordinates;
@@ -31,6 +37,9 @@ public class Robot implements ExecutesInstructions {
     }
 
     public void forward() {
+        if (status == Status.LOST)
+            return;
+
         CartesianCoordinates newCoordinates = getOrientation().forward(this);
 
         boolean isNextCoordinateValid = isValidCoordinate(newCoordinates);
@@ -42,8 +51,8 @@ public class Robot implements ExecutesInstructions {
 
         if(!isNextCoordinateValid) {
             leaveScentOnSurface();
-            // stop the processing of the current robot if it falls
-            throw new IllegalStateException("Robot fell of the Mars surface!");
+            status = Status.LOST;
+            return;
         }
 
         coordinates = newCoordinates;
@@ -63,7 +72,12 @@ public class Robot implements ExecutesInstructions {
 
     @Override
     public String toString() {
-        return String.format("Robot is at (%s, %s), heading %s", coordinates.getX(), coordinates.getY(), orientation.getClass().getSimpleName().charAt(0));
+        return String.format("%s %s %s%s", coordinates.getX(), coordinates.getY(),
+                orientation.getClass().getSimpleName().charAt(0), status == Status.LOST ? " LOST": "");
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
 }
