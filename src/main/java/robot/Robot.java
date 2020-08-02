@@ -16,7 +16,8 @@ public class Robot {
         LOST, ALIVE
     }
 
-    Status status = Status.ALIVE;
+    @Getter
+    private Status status = Status.ALIVE;
 
     @NonNull
     @Getter
@@ -79,9 +80,4 @@ public class Robot {
         return String.format("%s %s %s%s", coordinates.getX(), coordinates.getY(),
                 orientation.getClass().getSimpleName().charAt(0), status == Status.LOST ? " LOST": "");
     }
-
-    public Status getStatus() {
-        return status;
-    }
-
 }
