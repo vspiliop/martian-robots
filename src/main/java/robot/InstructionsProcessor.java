@@ -1,10 +1,22 @@
-import java.io.*;
+package robot;
+
+import mars.CartesianCoordinates;
+import mars.MarsSurface;
+import robot.actions.*;
+import robot.actions.moving.ProceedForwardInstruction;
+import robot.actions.turning.TurnLeftInstruction;
+import robot.actions.turning.TurnRightInstruction;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.function.Consumer;
 
 /**
  * Can be improved to write to file via BufferedWritter, so that we can deal with big result files as well.
  */
-public class CommandsProcessor {
+public class InstructionsProcessor {
 
     MarsSurface surface;
 
@@ -34,7 +46,7 @@ public class CommandsProcessor {
     }
 
     /**
-     * This could be moved to a Orientation factory class..
+     * This could be moved to a robot.actions.Orientation factory class..
      */
     public Orientation createOrientation(String orientation) {
         if(orientation.equals("N"))
@@ -50,7 +62,7 @@ public class CommandsProcessor {
     }
 
     /**
-     * This could be moved to a Robot factory class..
+     * This could be moved to a robot.Robot factory class..
      */
     public Robot createRobot(String line) {
         String[] inputArray = line.split(" ");
@@ -60,7 +72,7 @@ public class CommandsProcessor {
     }
 
     /**
-     * This could be moved to a MarsSurface factory class..
+     * This could be moved to a mars.MarsSurface factory class..
      */
     private MarsSurface createMarsSurface(String line) {
         String[] inputArray = line.split(" ");

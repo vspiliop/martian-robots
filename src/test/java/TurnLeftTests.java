@@ -1,6 +1,14 @@
+import mars.CartesianCoordinates;
+import mars.MarsSurface;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import robot.*;
+import robot.actions.EastOrientation;
+import robot.actions.NorthOrientation;
+import robot.actions.SouthOrientation;
+import robot.actions.WestOrientation;
+import robot.actions.turning.TurnLeftInstruction;
 
 public class TurnLeftTests {
 

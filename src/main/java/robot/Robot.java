@@ -1,13 +1,18 @@
+package robot;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import mars.CartesianCoordinates;
+import mars.MarsSurface;
+import robot.actions.Orientation;
 
 import java.util.function.Consumer;
 
 @RequiredArgsConstructor
-public class Robot implements ExecutesInstructions {
+public class Robot {
 
-    enum Status {
+    public enum Status {
         LOST, ALIVE
     }
 
@@ -23,7 +28,6 @@ public class Robot implements ExecutesInstructions {
     @Getter
     private Orientation orientation;
 
-    @Override
     public void execute(Consumer<Robot> instructions) {
         instructions.accept(this);
     }

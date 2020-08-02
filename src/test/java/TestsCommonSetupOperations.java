@@ -1,3 +1,6 @@
+import mars.CartesianCoordinates;
+import mars.MarsSurface;
+import robot.actions.moving.ProceedForwardInstruction;
 import org.junit.Before;
 
 public class TestsCommonSetupOperations {

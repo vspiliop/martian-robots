@@ -1,3 +1,5 @@
+package mars;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

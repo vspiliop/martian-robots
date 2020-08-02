@@ -1,3 +1,5 @@
+import mars.CartesianCoordinates;
+import mars.MarsSurface;
 import org.junit.Assert;
 import org.junit.Test;
 

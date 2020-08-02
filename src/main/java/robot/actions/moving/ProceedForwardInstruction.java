@@ -1,3 +1,7 @@
+package robot.actions.moving;
+
+import robot.Robot;
+
 import java.util.function.Consumer;
 
 public class ProceedForwardInstruction implements Consumer<Robot> {

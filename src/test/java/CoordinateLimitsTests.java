@@ -1,3 +1,4 @@
+import mars.CartesianCoordinates;
 import org.junit.Test;
 
 public class CoordinateLimitsTests {

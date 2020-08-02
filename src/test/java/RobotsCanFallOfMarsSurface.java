@@ -1,5 +1,8 @@
+import mars.CartesianCoordinates;
 import org.junit.Assert;
 import org.junit.Test;
+import robot.actions.NorthOrientation;
+import robot.Robot;
 
 public class RobotsCanFallOfMarsSurface extends TestsCommonSetupOperations {
 

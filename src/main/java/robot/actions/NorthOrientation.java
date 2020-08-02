@@ -1,3 +1,8 @@
+package robot.actions;
+
+import mars.CartesianCoordinates;
+import robot.Robot;
+
 public class NorthOrientation implements Orientation {
 
     @Override

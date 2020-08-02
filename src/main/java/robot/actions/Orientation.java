@@ -1,3 +1,8 @@
+package robot.actions;
+
+import mars.CartesianCoordinates;
+import robot.Robot;
+
 /**
  * Represents where the robot is heading to and how to move around based on where it is heading.
  */

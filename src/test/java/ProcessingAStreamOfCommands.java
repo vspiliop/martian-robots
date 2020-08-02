@@ -1,5 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
+import robot.InstructionsProcessor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +14,7 @@ public class ProcessingAStreamOfCommands {
         InputStream instructions = Files.newInputStream(Paths.get("src/test/resources/instructions_from_exercise_description"));
         String expectedOutput = Files.readString(Paths.get("src/test/resources/expected_output_from_exercise_description"));
 
-        Assert.assertEquals(expectedOutput, new CommandsProcessor().process(instructions));
+        Assert.assertEquals(expectedOutput, new InstructionsProcessor().process(instructions));
     }
 
 }

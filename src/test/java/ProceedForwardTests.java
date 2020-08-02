@@ -1,5 +1,11 @@
+import mars.CartesianCoordinates;
 import org.junit.Assert;
 import org.junit.Test;
+import robot.*;
+import robot.actions.EastOrientation;
+import robot.actions.NorthOrientation;
+import robot.actions.SouthOrientation;
+import robot.actions.WestOrientation;
 
 public class ProceedForwardTests extends TestsCommonSetupOperations {
 

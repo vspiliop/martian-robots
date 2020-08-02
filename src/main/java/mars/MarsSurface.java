@@ -1,3 +1,5 @@
+package mars;
+
 import lombok.Getter;
 
 import java.util.HashMap;
