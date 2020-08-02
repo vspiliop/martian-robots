@@ -2,16 +2,10 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.util.HashMap;
 import java.util.function.Consumer;
 
 @RequiredArgsConstructor
 public class Robot implements ExecutesInstructions {
-
-    /**
-     * This represents the internal comms between robots, when they are constructed.
-     */
-    static final private HashMap<CartesianCoordinates, Object> scent = new HashMap<>();
 
     @NonNull
     @Getter
