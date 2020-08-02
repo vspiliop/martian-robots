@@ -1,41 +1,49 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TurnLeftTests {
 
     private final CartesianCoordinates coordinates = new CartesianCoordinates(50, 50);
 
+    private MarsSurface surface;
+
+    @Before
+    public void setup() {
+        surface = new MarsSurface(coordinates);
+    }
+
     @Test
-    public void roverTurnsLeftWhileFacingNorth() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), new MarsSurface(coordinates), new NorthOrientation());
+    public void robotTurnsLeftWhileFacingNorth() {
+        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, new NorthOrientation());
         robot.execute(new TurnLeftInstruction());
         Assert.assertEquals(WestOrientation.class, robot.getOrientation().getClass());
     }
 
     @Test
-    public void roverTurnsLeftWhileFacingWest() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), new MarsSurface(coordinates), new WestOrientation());
+    public void robotTurnsLeftWhileFacingWest() {
+        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, new WestOrientation());
         robot.execute(new TurnLeftInstruction());
         Assert.assertEquals(SouthOrientation.class, robot.getOrientation().getClass());
     }
 
     @Test
-    public void roverTurnsLeftWhileFacingSouth() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), new MarsSurface(coordinates), new SouthOrientation());
+    public void robotTurnsLeftWhileFacingSouth() {
+        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, new SouthOrientation());
         robot.execute(new TurnLeftInstruction());
         Assert.assertEquals(EastOrientation.class, robot.getOrientation().getClass());
     }
 
     @Test
-    public void roverTurnsLeftWhileFacingEast() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), new MarsSurface(coordinates), new EastOrientation());
+    public void robotTurnsLeftWhileFacingEast() {
+        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, new EastOrientation());
         robot.execute(new TurnLeftInstruction());
         Assert.assertEquals(NorthOrientation.class, robot.getOrientation().getClass());
     }
 
     @Test
-    public void roverTurnsLeft360Degrees() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), new MarsSurface(coordinates), new NorthOrientation());
+    public void robotTurnsLeft360Degrees() {
+        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, new NorthOrientation());
         robot.execute(new TurnLeftInstruction().andThen(new TurnLeftInstruction()).andThen(new TurnLeftInstruction()).andThen(new TurnLeftInstruction()));
         Assert.assertEquals(NorthOrientation.class, robot.getOrientation().getClass());
     }

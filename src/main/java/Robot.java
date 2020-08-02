@@ -40,14 +40,14 @@ public class Robot implements ExecutesInstructions {
         CartesianCoordinates newCoordinates = getOrientation().forward(this);
 
         boolean isNextCoordinateValid = isValidCoordinate(newCoordinates);
+        boolean scentOnTheSurface = surface.detectScent(getCoordinates());
 
-        // if next coord is not valid and a robot has fell from the same current coord, skip the current instruction
-        if(!isNextCoordinateValid && scent.containsKey(getCoordinates())) {
+        if(!isNextCoordinateValid && scentOnTheSurface) {
             return;
         }
 
-        if(!isNextCoordinateValid && !scent.containsKey(getCoordinates())) {
-            scent.put(getCoordinates(), null);
+        if(!isNextCoordinateValid) {
+            surface.leaveScent(getCoordinates());
             // stop the processing of the current robot if it falls
             throw new IllegalStateException("Robot fell of the Mars surface!");
         }
