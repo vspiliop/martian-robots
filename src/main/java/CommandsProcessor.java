@@ -23,12 +23,7 @@ public class CommandsProcessor {
                     robot = createRobot(line);
                 } else if (nextRobotLineNumber + 1 == lineNumber) {
                     nextRobotLineNumber+=3;
-                    try {
-                        robot.execute(createInstructionChain(line));
-                    } catch (IllegalStateException ex) {
-                        result.append(robot);
-                        result.append("LOST");
-                    }
+                    robot.execute(createInstructionChain(line));
                     result.append(robot);
                     result.append(System.lineSeparator());
                 }
