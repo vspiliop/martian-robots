@@ -1,25 +1,14 @@
 import mars.CartesianCoordinates;
-import mars.MarsSurface;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import robot.*;
+import robot.Robot;
 import robot.actions.EastOrientation;
 import robot.actions.NorthOrientation;
 import robot.actions.SouthOrientation;
 import robot.actions.WestOrientation;
 import robot.actions.turning.TurnLeftInstruction;
 
-public class TurnLeftTests {
-
-    private final CartesianCoordinates coordinates = new CartesianCoordinates(50, 50);
-
-    private MarsSurface surface;
-
-    @Before
-    public void setup() {
-        surface = new MarsSurface(coordinates);
-    }
+public class TurnLeftTests extends TestsCommonSetupOperations {
 
     @Test
     public void robotTurnsLeftWhileFacingNorth() {

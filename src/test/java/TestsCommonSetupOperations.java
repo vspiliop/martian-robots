@@ -2,12 +2,15 @@ import mars.CartesianCoordinates;
 import mars.MarsSurface;
 import robot.actions.moving.ProceedForwardInstruction;
 import org.junit.Before;
+import robot.actions.turning.TurnRightInstruction;
 
 public class TestsCommonSetupOperations {
 
-    public static final ProceedForwardInstruction proceedForwardInstruction = new ProceedForwardInstruction();
+    final ProceedForwardInstruction proceedForwardInstruction = new ProceedForwardInstruction();
 
-    public static final CartesianCoordinates coordinates = new CartesianCoordinates(3, 3);
+    final TurnRightInstruction turnRightInstruction = new TurnRightInstruction();
+
+    final CartesianCoordinates coordinates = new CartesianCoordinates(3, 3);
 
     MarsSurface surface;
 
