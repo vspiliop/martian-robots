@@ -48,9 +48,8 @@ public class Robot {
         CartesianCoordinates newCoordinates = getOrientation().forward(this);
 
         boolean isNextCoordinateValid = isValidCoordinate(newCoordinates);
-        boolean scentOnTheSurface = isScentOnTheSurface();
 
-        if(!isNextCoordinateValid && scentOnTheSurface) {
+        if(!isNextCoordinateValid && isScentOnTheSurface()) {
             return;
         }
 
