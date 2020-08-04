@@ -4,6 +4,7 @@ Install Lombok plugin. This is not required if you use maven to build and test.
 
 ## Build and run all unit tests
 
+ - Install Java 11 or above
  - Install Maven
  - Run
  
