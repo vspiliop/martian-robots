@@ -7,6 +7,11 @@ import static robot.actions.InstructionsChainFactory.instructionChain;
 public class FactoryCanCreateInstructionChains {
 
     @Test(expected = IllegalArgumentException.class)
+    public void maxInstructionNullChain() {
+        instructionChain(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void maxInstructionChainLimitReached() {
         instructionChain(createInstructionsStringOfLength(101));
     }
