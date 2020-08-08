@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.util.function.Consumer;
 
 import static robot.actions.OrientationFactory.orientation;
+import static robot.actions.moving.ProceedForwardInstruction.forwardInstruction;
+import static robot.actions.turning.TurnLeftInstruction.leftInstruction;
+import static robot.actions.turning.TurnRightInstruction.rightInstruction;
 
 /**
  * Can be improved to write to file via BufferedWritter, so that we can deal with big result files as well.
@@ -76,11 +79,11 @@ public class InstructionsProcessor {
 
         return line.chars().mapToObj((int instruction)-> {
             if (instruction == 'F')
-                return new ProceedForwardInstruction();
+                return forwardInstruction();
             if (instruction == 'R')
-                return new TurnRightInstruction();
+                return rightInstruction();
             if (instruction == 'L')
-                return new TurnLeftInstruction();
+                return leftInstruction();
             throw new IllegalArgumentException("Unknown command");
         }).reduce((Robot r) -> { }, Consumer::andThen);
     }
