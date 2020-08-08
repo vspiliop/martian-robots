@@ -8,10 +8,12 @@ import static robot.actions.WestOrientation.westOrientation;
 
 public class NorthOrientation implements Orientation {
 
+    private static final Orientation NORTH = new NorthOrientation();
+
     private NorthOrientation() {}
 
     public static Orientation northOrientation() {
-        return new NorthOrientation();
+        return NORTH;
     }
 
     @Override

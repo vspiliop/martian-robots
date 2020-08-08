@@ -8,10 +8,12 @@ import static robot.actions.WestOrientation.westOrientation;
 
 public class SouthOrientation implements Orientation {
 
+    private static final Orientation SOUTH = new SouthOrientation();
+
     private SouthOrientation() {}
 
     public static Orientation southOrientation() {
-        return new SouthOrientation();
+        return SOUTH;
     }
 
     @Override
