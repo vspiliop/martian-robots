@@ -3,16 +3,25 @@ package robot.actions;
 import mars.CartesianCoordinates;
 import robot.Robot;
 
+import static robot.actions.NorthOrientation.northOrientation;
+import static robot.actions.SouthOrientation.southOrientation;
+
 public class EastOrientation implements Orientation {
+
+    private EastOrientation() {}
+
+    public static Orientation eastOrientation() {
+        return new EastOrientation();
+    }
 
     @Override
     public Orientation left() {
-        return new NorthOrientation();
+        return northOrientation();
     }
 
     @Override
     public Orientation right() {
-        return new SouthOrientation();
+        return southOrientation();
     }
 
     @Override
