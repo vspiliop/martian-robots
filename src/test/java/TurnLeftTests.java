@@ -8,6 +8,7 @@ import robot.actions.SouthOrientation;
 import robot.actions.WestOrientation;
 
 import static robot.actions.EastOrientation.eastOrientation;
+import static robot.actions.InstructionsChainFactory.instructionChain;
 import static robot.actions.NorthOrientation.northOrientation;
 import static robot.actions.SouthOrientation.southOrientation;
 import static robot.actions.WestOrientation.westOrientation;
@@ -46,7 +47,7 @@ public class TurnLeftTests extends TestsCommonSetupOperations {
     @Test
     public void robotTurnsLeft360Degrees() {
         Robot robot = new Robot(new CartesianCoordinates(1,1), surface, northOrientation());
-        robot.execute(leftInstruction().andThen(leftInstruction()).andThen(leftInstruction()).andThen(leftInstruction()));
+        robot.execute(instructionChain("LLLL"));
         Assert.assertEquals(NorthOrientation.class, robot.getOrientation().getClass());
     }
 }

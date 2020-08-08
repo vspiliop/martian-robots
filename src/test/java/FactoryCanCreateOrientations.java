@@ -10,32 +10,32 @@ import static robot.actions.WestOrientation.westOrientation;
 public class FactoryCanCreateOrientations {
 
     @Test
-    public void createSouthOrientatation() {
-        Assert.assertEquals(southOrientation().getClass(), orientation("S").getClass());
+    public void createSouthOrientation() {
+        Assert.assertEquals(southOrientation(), orientation("S"));
     }
 
     @Test
-    public void createNorthOrientatation() {
-        Assert.assertEquals(northOrientation().getClass(), orientation("N").getClass());
+    public void createNorthOrientation() {
+        Assert.assertEquals(northOrientation(), orientation("N"));
     }
 
     @Test
-    public void createEastOrientatation() {
-        Assert.assertEquals(eastOrientation().getClass(), orientation("E").getClass());
+    public void createEastOrientation() {
+        Assert.assertEquals(eastOrientation(), orientation("E"));
     }
 
     @Test
-    public void createWestOrientatation() {
-        Assert.assertEquals(westOrientation().getClass(), orientation("W").getClass());
+    public void createWestOrientation() {
+        Assert.assertEquals(westOrientation(), orientation("W"));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void createNullOrientatation() {
+    public void createNullOrientation() {
         orientation(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void createUnknownOrientatation() {
+    public void createUnknownOrientation() {
         orientation("bla");
     }
 
