@@ -1,11 +1,7 @@
 import mars.CartesianCoordinates;
 import org.junit.Assert;
 import org.junit.Test;
-import robot.*;
-import robot.actions.EastOrientation;
-import robot.actions.NorthOrientation;
-import robot.actions.SouthOrientation;
-import robot.actions.WestOrientation;
+import robot.Robot;
 
 import static robot.actions.EastOrientation.eastOrientation;
 import static robot.actions.NorthOrientation.northOrientation;
@@ -19,7 +15,7 @@ public class ProceedForwardTests extends TestsCommonSetupOperations {
     public void robotProceedForwardWhileFacingNorth() {
         Robot robot = new Robot(new CartesianCoordinates(1,1), surface, northOrientation());
         robot.execute(forwardInstruction());
-        Assert.assertEquals(NorthOrientation.class, robot.getOrientation().getClass());
+        Assert.assertEquals(northOrientation(), robot.getOrientation());
         Assert.assertEquals(robot.getCoordinates(), new CartesianCoordinates(1,2));
     }
 
@@ -27,7 +23,7 @@ public class ProceedForwardTests extends TestsCommonSetupOperations {
     public void robotProceedForwardWhileFacingEast() {
         Robot robot = new Robot(new CartesianCoordinates(1,1), surface, eastOrientation());
         robot.execute(forwardInstruction());
-        Assert.assertEquals(EastOrientation.class, robot.getOrientation().getClass());
+        Assert.assertEquals(eastOrientation(), robot.getOrientation());
         Assert.assertEquals(robot.getCoordinates(), new CartesianCoordinates(2,1));
     }
 
@@ -35,7 +31,7 @@ public class ProceedForwardTests extends TestsCommonSetupOperations {
     public void robotProceedForwardWhileFacingSouth() {
         Robot robot = new Robot(new CartesianCoordinates(1,1), surface, southOrientation());
         robot.execute(forwardInstruction());
-        Assert.assertEquals(SouthOrientation.class, robot.getOrientation().getClass());
+        Assert.assertEquals(southOrientation(), robot.getOrientation());
         Assert.assertEquals(robot.getCoordinates(), new CartesianCoordinates(1,0));
     }
 
@@ -43,7 +39,7 @@ public class ProceedForwardTests extends TestsCommonSetupOperations {
     public void robotProceedForwardWhileFacingWest() {
         Robot robot = new Robot(new CartesianCoordinates(1,1), surface, westOrientation());
         robot.execute(forwardInstruction());
-        Assert.assertEquals(WestOrientation.class, robot.getOrientation().getClass());
+        Assert.assertEquals(westOrientation(), robot.getOrientation());
         Assert.assertEquals(robot.getCoordinates(), new CartesianCoordinates(0,1));
     }
 }
