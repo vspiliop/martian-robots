@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public class ProceedForwardInstruction implements Consumer<Robot> {
 
-    public static final ProceedForwardInstruction FORWARD_INSTRUCTION = new ProceedForwardInstruction();
+    private static final ProceedForwardInstruction FORWARD_INSTRUCTION = new ProceedForwardInstruction();
 
     private ProceedForwardInstruction() {}
 

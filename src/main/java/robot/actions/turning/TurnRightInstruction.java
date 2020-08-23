@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 
 public class TurnRightInstruction implements Consumer<Robot> {
 
-    public static final TurnRightInstruction RIGHT_INSTRUCTION = new TurnRightInstruction();
+    private static final TurnRightInstruction RIGHT_INSTRUCTION = new TurnRightInstruction();
 
     private TurnRightInstruction() {}
 
