@@ -1,4 +1,3 @@
-import mars.CartesianCoordinates;
 import org.junit.Assert;
 import org.junit.Test;
 import robot.Robot;
@@ -14,36 +13,36 @@ public class TurnLeftTests extends TestsCommonSetupOperations {
 
     @Test
     public void robotTurnsLeftWhileFacingNorth() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, northOrientation());
+        Robot robot = new Robot(coordinate11, surface, northOrientation());
         robot.execute(leftInstruction());
         Assert.assertEquals(westOrientation(), robot.getOrientation());
     }
 
     @Test
     public void robotTurnsLeftWhileFacingWest() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, westOrientation());
+        Robot robot = new Robot(coordinate11, surface, westOrientation());
         robot.execute(leftInstruction());
         Assert.assertEquals(southOrientation(), robot.getOrientation());
     }
 
     @Test
     public void robotTurnsLeftWhileFacingSouth() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, southOrientation());
+        Robot robot = new Robot(coordinate11, surface, southOrientation());
         robot.execute(leftInstruction());
         Assert.assertEquals(eastOrientation(), robot.getOrientation());
     }
 
     @Test
     public void robotTurnsLeftWhileFacingEast() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, eastOrientation());
+        Robot robot = new Robot(coordinate11, surface, eastOrientation());
         robot.execute(leftInstruction());
         Assert.assertEquals(northOrientation(), robot.getOrientation());
     }
 
     @Test
     public void robotTurnsLeft360Degrees() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, northOrientation());
-        robot.execute(instructionChain("LLLL"));
+        Robot robot = new Robot(coordinate11, surface, northOrientation());
+        robot.execute(instructionChain("LLLL").getOrElseThrow(t -> t));
         Assert.assertEquals(northOrientation(), robot.getOrientation());
     }
 }

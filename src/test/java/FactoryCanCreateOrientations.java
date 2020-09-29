@@ -1,6 +1,6 @@
-import org.junit.Assert;
 import org.junit.Test;
 
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static robot.actions.EastOrientation.eastOrientation;
 import static robot.actions.NorthOrientation.northOrientation;
 import static robot.actions.OrientationFactory.orientation;
@@ -11,32 +11,38 @@ public class FactoryCanCreateOrientations {
 
     @Test
     public void createSouthOrientation() {
-        Assert.assertEquals(southOrientation(), orientation("S"));
+        assertThat(orientation("S")).isRight();
+        assertThat(orientation("S")).containsOnRight(southOrientation());
     }
 
     @Test
     public void createNorthOrientation() {
-        Assert.assertEquals(northOrientation(), orientation("N"));
+        assertThat(orientation("N")).isRight();
+        assertThat(orientation("N")).containsOnRight(northOrientation());
     }
 
     @Test
     public void createEastOrientation() {
-        Assert.assertEquals(eastOrientation(), orientation("E"));
+        assertThat(orientation("E")).isRight();
+        assertThat(orientation("E")).containsOnRight(eastOrientation());
     }
 
     @Test
     public void createWestOrientation() {
-        Assert.assertEquals(westOrientation(), orientation("W"));
+        assertThat(orientation("W")).isRight();
+        assertThat(orientation("W")).containsOnRight(westOrientation());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void createNullOrientation() {
-        orientation(null);
+        assertThat(orientation(null)).isLeft();
+        assertThat(orientation(null)).containsLeftInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void createUnknownOrientation() {
-        orientation("bla");
+        assertThat(orientation("bla")).isLeft();
+        assertThat(orientation("bla")).containsLeftInstanceOf(IllegalArgumentException.class);
     }
 
 }

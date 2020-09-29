@@ -1,4 +1,3 @@
-import mars.CartesianCoordinates;
 import org.junit.Assert;
 import org.junit.Test;
 import robot.Robot;
@@ -13,33 +12,33 @@ public class ProceedForwardTests extends TestsCommonSetupOperations {
 
     @Test
     public void robotProceedForwardWhileFacingNorth() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, northOrientation());
+        Robot robot = new Robot(coordinate11, surface, northOrientation());
         robot.execute(forwardInstruction());
         Assert.assertEquals(northOrientation(), robot.getOrientation());
-        Assert.assertEquals(robot.getCoordinates(), new CartesianCoordinates(1,2));
+        Assert.assertEquals(robot.getCoordinates(), coordinates12);
     }
 
     @Test
     public void robotProceedForwardWhileFacingEast() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, eastOrientation());
+        Robot robot = new Robot(coordinate11, surface, eastOrientation());
         robot.execute(forwardInstruction());
         Assert.assertEquals(eastOrientation(), robot.getOrientation());
-        Assert.assertEquals(robot.getCoordinates(), new CartesianCoordinates(2,1));
+        Assert.assertEquals(robot.getCoordinates(), coordinates21);
     }
 
     @Test
     public void robotProceedForwardWhileFacingSouth() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, southOrientation());
+        Robot robot = new Robot(coordinate11, surface, southOrientation());
         robot.execute(forwardInstruction());
         Assert.assertEquals(southOrientation(), robot.getOrientation());
-        Assert.assertEquals(robot.getCoordinates(), new CartesianCoordinates(1,0));
+        Assert.assertEquals(robot.getCoordinates(), coordinates10);
     }
 
     @Test
     public void robotProceedForwardWhileFacingWest() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, westOrientation());
+        Robot robot = new Robot(coordinate11, surface, westOrientation());
         robot.execute(forwardInstruction());
         Assert.assertEquals(westOrientation(), robot.getOrientation());
-        Assert.assertEquals(robot.getCoordinates(), new CartesianCoordinates(0,1));
+        Assert.assertEquals(robot.getCoordinates(), coordinates01);
     }
 }

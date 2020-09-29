@@ -1,5 +1,6 @@
 package mars;
 
+import io.vavr.control.Either;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -14,14 +15,16 @@ public class CartesianCoordinates {
     @Getter
     private int y;
 
-    public CartesianCoordinates(int x, int y) {
-
-        if(x > MAX_COORDINATE_VALUE || y > MAX_COORDINATE_VALUE) {
-            throw new IllegalArgumentException("No coordinate can be more than 50");
-        }
-
+    private CartesianCoordinates(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public static Either<IllegalArgumentException, CartesianCoordinates> from(int x, int y) {
+        if(x > MAX_COORDINATE_VALUE || y > MAX_COORDINATE_VALUE) {
+            return Either.left(new IllegalArgumentException("No coordinate can be more than 50"));
+        }
+        return Either.right(new CartesianCoordinates(x, y));
     }
 
     public CartesianCoordinates incrementAxisX() {

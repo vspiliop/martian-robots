@@ -16,7 +16,7 @@ public class MarsSurface {
     final private HashMap<CartesianCoordinates, Object> scent = new HashMap<>();
 
     @Getter
-    private final CartesianCoordinates lowerBound = new CartesianCoordinates(0, 0);
+    private final CartesianCoordinates lowerBound = CartesianCoordinates.from(0, 0).getOrElseThrow(t -> t);
 
     @Getter
     private CartesianCoordinates upperBound;

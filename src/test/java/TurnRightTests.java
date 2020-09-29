@@ -1,4 +1,3 @@
-import mars.CartesianCoordinates;
 import org.junit.Assert;
 import org.junit.Test;
 import robot.Robot;
@@ -14,36 +13,36 @@ public class TurnRightTests extends TestsCommonSetupOperations {
 
     @Test
     public void robotTurnsRightWhileFacingNorth() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, northOrientation());
+        Robot robot = new Robot(coordinate11, surface, northOrientation());
         robot.execute(rightInstruction());
         Assert.assertEquals(eastOrientation(), robot.getOrientation());
     }
 
     @Test
     public void robotTurnsRightWhileFacing() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, eastOrientation());
+        Robot robot = new Robot(coordinate11, surface, eastOrientation());
         robot.execute(rightInstruction());
         Assert.assertEquals(southOrientation(), robot.getOrientation());
     }
 
     @Test
     public void robotTurnsRightWhileFacingSouth() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, southOrientation());
+        Robot robot = new Robot(coordinate11, surface, southOrientation());
         robot.execute(rightInstruction());
         Assert.assertEquals(westOrientation(), robot.getOrientation());
     }
 
     @Test
     public void robotTurnsRightWhileFacingWest() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, westOrientation());
+        Robot robot = new Robot(coordinate11, surface, westOrientation());
         robot.execute(rightInstruction());
         Assert.assertEquals(northOrientation(), robot.getOrientation());
     }
 
     @Test
     public void robotTurnsRight360Degrees() {
-        Robot robot = new Robot(new CartesianCoordinates(1,1), surface, northOrientation());
-        robot.execute(instructionChain("RRRR"));
+        Robot robot = new Robot(coordinate11, surface, northOrientation());
+        robot.execute(instructionChain("RRRR").getOrElseThrow(t -> t));
         Assert.assertEquals(northOrientation(), robot.getOrientation());
     }
 }

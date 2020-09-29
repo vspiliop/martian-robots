@@ -1,5 +1,6 @@
 package robot;
 
+import io.vavr.control.Option;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,9 @@ public class Robot {
     @Getter
     private Orientation orientation;
 
-    public void execute(Consumer<Robot> instructions) {
+    public Option.None execute(Consumer<Robot> instructions) {
         instructions.accept(this);
+        return (Option.None) Option.none();
     }
 
     public void turnLeft() {

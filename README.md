@@ -1,3 +1,9 @@
+## Approach
+
+ - Keep method signatures clear: Refactored to use the `Either` and `Try` monads of `Vavr` to avoid throwing runtime exceptions.
+ - Object Oriented design for the `Robot`, `MarsSurface`, `Orientation` and `Cartesian Coordinates`.
+ - `InstructionChain` are chained `Consumer` functions via `andThen()`
+
 ## The Problem
 
 The surface of Mars can be modelled by a rectangular grid around which robots are able to

@@ -1,24 +1,39 @@
 import org.junit.Test;
 
+import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static robot.actions.InstructionsChainFactory.instructionChain;
 
 public class FactoryCanCreateInstructionChains {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void maxInstructionNullChain() {
-        instructionChain(null);
+        final var underTest = instructionChain(null);
+        assertThat(underTest).isLeft();
+        assertThat(underTest).containsLeftInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
+    public void unknownCommandInChain() {
+        final var underTest = instructionChain("FFLY");
+        assertThat(underTest).isLeft();
+        assertThat(underTest).containsLeftInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test()
     public void maxInstructionChainLimitReached() {
-        instructionChain(createInstructionsStringOfLength(101));
+        final var underTest = instructionChain(createInstructionsStringOfLength(101));
+        assertThat(underTest).isLeft();
+        assertThat(underTest).containsLeftInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void maxInstructionChainLimitNitReached() {
-        instructionChain(createInstructionsStringOfLength(100));
+    public void maxInstructionChainLimitNotReached() {
+        final var underTest = instructionChain(createInstructionsStringOfLength(100));
+        assertThat(underTest).isRight();
+        assertThat(underTest).containsRightInstanceOf(Consumer.class);
     }
 
     private String createInstructionsStringOfLength(int length) {

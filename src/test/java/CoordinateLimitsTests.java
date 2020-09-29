@@ -1,21 +1,26 @@
 import mars.CartesianCoordinates;
 import org.junit.Test;
 
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
+
 public class CoordinateLimitsTests {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void maxAxisYExceeded() {
-        new CartesianCoordinates(50,51);
+        assertThat(CartesianCoordinates.from(50,51)).isLeft();
+        assertThat(CartesianCoordinates.from(50,51)).containsLeftInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void maxAxisXExceeded() {
-        new CartesianCoordinates(51,50);
+        assertThat(CartesianCoordinates.from(51,50)).isLeft();
+        assertThat(CartesianCoordinates.from(51,50)).containsLeftInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void happyPath() {
-        new CartesianCoordinates(50,50);
+        assertThat(CartesianCoordinates.from(50,50)).isRight();
+        assertThat(CartesianCoordinates.from(50,50)).containsRightInstanceOf(CartesianCoordinates.class);
     }
 
 }

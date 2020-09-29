@@ -36,6 +36,8 @@
 
         <junit.version>4.12</junit.version>
         <lombok.version>1.18.8</lombok.version>
+        <vavr.version>0.10.3</vavr.version>
+        <assertj-vavr.version>0.2.0</assertj-vavr.version>
     </properties>
 
     <dependencies>
@@ -45,9 +47,20 @@
             <version>${lombok.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>${vavr.version}</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-vavr</artifactId>
+            <version>${assertj-vavr.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
