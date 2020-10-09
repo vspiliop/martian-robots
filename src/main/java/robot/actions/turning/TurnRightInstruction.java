@@ -1,10 +1,11 @@
 package robot.actions.turning;
 
+import io.vavr.control.Either;
 import robot.Robot;
 
-import java.util.function.Consumer;
+import java.util.function.Function;
 
-public class TurnRightInstruction implements Consumer<Robot> {
+public class TurnRightInstruction implements Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>> {
 
     private static final TurnRightInstruction RIGHT_INSTRUCTION = new TurnRightInstruction();
 
@@ -15,7 +16,7 @@ public class TurnRightInstruction implements Consumer<Robot> {
     }
 
     @Override
-    public void accept(Robot robot) {
-        robot.turnRight();
+    public Either<IllegalArgumentException, Robot> apply(Either<IllegalArgumentException, Robot> robot) {
+        return robot.flatMap(r -> r.turnRight());
     }
 }

@@ -1,8 +1,14 @@
 ## Approach
 
- - Keep method signatures clear: Refactored to use the `Either` and `Try` monads of `Vavr` to avoid throwing runtime exceptions.
+OO design but with a functional twist :-)
+
+ - Keep method signatures clear: Refactored to use the `Either` and `Try` monads of `Vavr` to avoid throwing exceptions.
+ - All possible errors are handled via `Either` composition.
  - Object Oriented design for the `Robot`, `MarsSurface`, `Orientation` and `Cartesian Coordinates`.
- - `InstructionChain` are chained `Consumer` functions via `andThen()`
+ - For `MarsSurface` a purely functional and immutable HashSet is used from `Vavr`. 
+ - `Robot`, `MarsSurface`, `Orientation` and `Cartesian Coordinates` are immutable and threadsafe.
+ - An `InstructionChain` are chained `Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>>` functions via `andThen()`. 
+ The execution of such a function yields either a new `Robot` or an `IllegalArgumentException` (aka `Either<IllegalArgumentException, Robot>`).
 
 ## The Problem
 

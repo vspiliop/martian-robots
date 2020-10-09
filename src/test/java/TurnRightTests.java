@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import robot.Robot;
 
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static robot.actions.EastOrientation.eastOrientation;
 import static robot.actions.InstructionsChainFactory.instructionChain;
 import static robot.actions.NorthOrientation.northOrientation;
@@ -13,36 +14,56 @@ public class TurnRightTests extends TestsCommonSetupOperations {
 
     @Test
     public void robotTurnsRightWhileFacingNorth() {
-        Robot robot = new Robot(coordinate11, surface, northOrientation());
-        robot.execute(rightInstruction());
-        Assert.assertEquals(eastOrientation(), robot.getOrientation());
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, northOrientation());
+        // when
+        final var result = robot.execute(rightInstruction());
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(eastOrientation(), result.get().getOrientation());
     }
 
     @Test
     public void robotTurnsRightWhileFacing() {
-        Robot robot = new Robot(coordinate11, surface, eastOrientation());
-        robot.execute(rightInstruction());
-        Assert.assertEquals(southOrientation(), robot.getOrientation());
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, eastOrientation());
+        // when
+        final var result = robot.execute(rightInstruction());
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(southOrientation(), result.get().getOrientation());
     }
 
     @Test
     public void robotTurnsRightWhileFacingSouth() {
-        Robot robot = new Robot(coordinate11, surface, southOrientation());
-        robot.execute(rightInstruction());
-        Assert.assertEquals(westOrientation(), robot.getOrientation());
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, southOrientation());
+        // when
+        final var result = robot.execute(rightInstruction());
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(westOrientation(), result.get().getOrientation());
     }
 
     @Test
     public void robotTurnsRightWhileFacingWest() {
-        Robot robot = new Robot(coordinate11, surface, westOrientation());
-        robot.execute(rightInstruction());
-        Assert.assertEquals(northOrientation(), robot.getOrientation());
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, westOrientation());
+        // when
+        final var result = robot.execute(rightInstruction());
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(northOrientation(), result.get().getOrientation());
     }
 
     @Test
     public void robotTurnsRight360Degrees() {
-        Robot robot = new Robot(coordinate11, surface, northOrientation());
-        robot.execute(instructionChain("RRRR").getOrElseThrow(t -> t));
-        Assert.assertEquals(northOrientation(), robot.getOrientation());
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, northOrientation());
+        // when
+        final var result = robot.execute(instructionChain("RRRR"));
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(northOrientation(), result.get().getOrientation());
     }
 }

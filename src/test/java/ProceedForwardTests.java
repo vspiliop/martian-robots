@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import robot.Robot;
 
+import static org.assertj.vavr.api.VavrAssertions.assertThat;
 import static robot.actions.EastOrientation.eastOrientation;
 import static robot.actions.NorthOrientation.northOrientation;
 import static robot.actions.SouthOrientation.southOrientation;
@@ -12,33 +13,49 @@ public class ProceedForwardTests extends TestsCommonSetupOperations {
 
     @Test
     public void robotProceedForwardWhileFacingNorth() {
-        Robot robot = new Robot(coordinate11, surface, northOrientation());
-        robot.execute(forwardInstruction());
-        Assert.assertEquals(northOrientation(), robot.getOrientation());
-        Assert.assertEquals(robot.getCoordinates(), coordinates12);
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, northOrientation());
+        // when
+        final var result = robot.execute(forwardInstruction());
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(northOrientation(), result.get().getOrientation());
+        Assert.assertEquals(coordinates12, result.get().getCoordinates());
     }
 
     @Test
     public void robotProceedForwardWhileFacingEast() {
-        Robot robot = new Robot(coordinate11, surface, eastOrientation());
-        robot.execute(forwardInstruction());
-        Assert.assertEquals(eastOrientation(), robot.getOrientation());
-        Assert.assertEquals(robot.getCoordinates(), coordinates21);
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, eastOrientation());
+        // when
+        final var result = robot.execute(forwardInstruction());
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(eastOrientation(), result.get().getOrientation());
+        Assert.assertEquals(coordinates21, result.get().getCoordinates());
     }
 
     @Test
     public void robotProceedForwardWhileFacingSouth() {
-        Robot robot = new Robot(coordinate11, surface, southOrientation());
-        robot.execute(forwardInstruction());
-        Assert.assertEquals(southOrientation(), robot.getOrientation());
-        Assert.assertEquals(robot.getCoordinates(), coordinates10);
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, southOrientation());
+        // when
+        final var result = robot.execute(forwardInstruction());
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(southOrientation(), result.get().getOrientation());
+        Assert.assertEquals(coordinates10, result.get().getCoordinates());
     }
 
     @Test
     public void robotProceedForwardWhileFacingWest() {
-        Robot robot = new Robot(coordinate11, surface, westOrientation());
-        robot.execute(forwardInstruction());
-        Assert.assertEquals(westOrientation(), robot.getOrientation());
-        Assert.assertEquals(robot.getCoordinates(), coordinates01);
+        // given
+        Robot robot = new Robot(Robot.Status.ALIVE, coordinate11, surface, westOrientation());
+        // when
+        final var result = robot.execute(forwardInstruction());
+        // then
+        assertThat(result).isRight();
+        Assert.assertEquals(westOrientation(), result.get().getOrientation());
+        Assert.assertEquals(coordinates01, result.get().getCoordinates());
     }
 }

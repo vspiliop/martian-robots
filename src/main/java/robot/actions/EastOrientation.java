@@ -1,5 +1,6 @@
 package robot.actions;
 
+import io.vavr.control.Either;
 import mars.CartesianCoordinates;
 import robot.Robot;
 
@@ -27,7 +28,7 @@ public class EastOrientation implements Orientation {
     }
 
     @Override
-    public CartesianCoordinates forward(Robot robot) {
+    public Either<IllegalArgumentException, CartesianCoordinates> forward(Robot robot) {
         return robot.getCoordinates().incrementAxisX();
     }
 }

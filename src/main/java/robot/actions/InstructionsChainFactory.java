@@ -4,8 +4,7 @@ import io.vavr.control.Either;
 import io.vavr.control.Option;
 import robot.Robot;
 
-import java.util.function.BinaryOperator;
-import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.IntFunction;
 
 import static io.vavr.API.*;
@@ -15,26 +14,27 @@ import static robot.actions.moving.ProceedForwardInstruction.forwardInstruction;
 import static robot.actions.turning.TurnLeftInstruction.leftInstruction;
 import static robot.actions.turning.TurnRightInstruction.rightInstruction;
 
+/**
+ * Creates a chain of Either<IllegalArgumentException, Robot>(s). It is an Either as a command execution may fail.
+ */
 public class InstructionsChainFactory {
-    public static Either<IllegalArgumentException, Consumer<Robot>> instructionChain(String line) {
+    public static Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>> instructionChain(String line) {
 
-        final IntFunction<Either<IllegalArgumentException, Consumer<Robot>>> generateInstruction = (int instruction) -> Match(instruction).of(
-              Case($(i -> i == 'F'), Either.right(forwardInstruction())),
-              Case($(i -> i == 'R'), Either.right(rightInstruction())),
-              Case($(i -> i == 'L'), Either.right(leftInstruction())),
-              Case($(), Either.left(new IllegalArgumentException("Unknown command"))));
-
-        BinaryOperator<Either<IllegalArgumentException, Consumer<Robot>>> reductionFunction =
-            (a, b) -> a.flatMap(ar -> b.map(br -> ar.andThen(br)));
-
-        Either<IllegalArgumentException, Consumer<Robot>> identity = Either.right((Robot r) -> {});
+        final Function<Character, Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>>> generateInstruction =
+                (Character instruction) ->
+                        Match(Option.of(instruction)).of(
+                          Case($Some($('F')), forwardInstruction()),
+                          Case($Some($('R')), rightInstruction()),
+                          Case($Some($('L')), leftInstruction()),
+                          Case($(), () -> leftEither -> Either.left(new IllegalArgumentException("Unknown command")))
+                        );
 
         return Match(Option.of(line)).of(
-                Case($Some($(l -> l.length() > 100)), Either.left(new IllegalArgumentException("Instruction chain cannot be longer than 100"))),
+                Case($Some($(l -> l.length() > 100)), () -> leftEither -> Either.left(new IllegalArgumentException("Instruction chain cannot be longer than 100"))),
                 Case($Some($(l -> l.length() <= 100)),
-                        () -> line.chars().mapToObj(generateInstruction).reduce(identity, reductionFunction)),
-                Case($None(), Either.left(new IllegalArgumentException("instructions line required"))),
-                Case($(), Either.left(new IllegalArgumentException("unknown line")))
+                        () -> line.chars().mapToObj(c -> (char)c).map(generateInstruction).reduce(e -> e.map(r -> r), Function::andThen)),
+                Case($None(), () -> leftEither -> Either.left(new IllegalArgumentException("instructions line required"))),
+                Case($(), () -> leftEither -> Either.left(new IllegalArgumentException("unknown line")))
         );
     }
 }

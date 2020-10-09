@@ -4,16 +4,19 @@ import io.vavr.control.Either;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+/**
+ * An immutable CartesianCoordinates implementation.
+ */
 @EqualsAndHashCode
-public class CartesianCoordinates {
+final public class CartesianCoordinates {
 
     public static final int MAX_COORDINATE_VALUE = 50;
 
     @Getter
-    private int x;
+    private final int x;
 
     @Getter
-    private int y;
+    private final int y;
 
     private CartesianCoordinates(int x, int y) {
         this.x = x;
@@ -27,20 +30,20 @@ public class CartesianCoordinates {
         return Either.right(new CartesianCoordinates(x, y));
     }
 
-    public CartesianCoordinates incrementAxisX() {
-        return new CartesianCoordinates(x + 1, y);
+    public Either<IllegalArgumentException, CartesianCoordinates> incrementAxisX() {
+        return CartesianCoordinates.from(x + 1, y);
     }
 
-    public CartesianCoordinates incrementAxisY() {
-        return new CartesianCoordinates(x, y + 1);
+    public Either<IllegalArgumentException, CartesianCoordinates> incrementAxisY() {
+        return CartesianCoordinates.from(x, y + 1);
     }
 
-    public CartesianCoordinates decrementAxisX() {
-        return new CartesianCoordinates(x - 1, y);
+    public Either<IllegalArgumentException, CartesianCoordinates> decrementAxisX() {
+        return CartesianCoordinates.from(x - 1, y);
     }
 
-    public CartesianCoordinates decrementAxisY() {
-        return new CartesianCoordinates(x, y - 1);
+    public Either<IllegalArgumentException, CartesianCoordinates> decrementAxisY() {
+        return CartesianCoordinates.from(x, y - 1);
     }
 
     public boolean isOnMarsSurface(MarsSurface surface) {

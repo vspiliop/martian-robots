@@ -1,5 +1,6 @@
 package robot.actions;
 
+import io.vavr.control.Either;
 import mars.CartesianCoordinates;
 import robot.Robot;
 
@@ -12,5 +13,5 @@ public interface Orientation {
 
     Orientation right();
 
-    CartesianCoordinates forward(Robot robot);
+    Either<IllegalArgumentException, CartesianCoordinates> forward(Robot robot);
 }

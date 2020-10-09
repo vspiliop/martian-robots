@@ -1,6 +1,9 @@
+import io.vavr.control.Either;
 import mars.CartesianCoordinates;
 import mars.MarsSurface;
-import org.junit.Before;
+import robot.Robot;
+
+import static robot.actions.NorthOrientation.northOrientation;
 
 public class TestsCommonSetupOperations {
 
@@ -20,11 +23,7 @@ public class TestsCommonSetupOperations {
 
     protected final CartesianCoordinates coordinates10 = CartesianCoordinates.from(1, 0).getOrElseThrow(t -> t);
 
-    MarsSurface surface;
+    MarsSurface surface = new MarsSurface(coordinates33);
 
-    @Before
-    public void setup() {
-        surface = new MarsSurface(coordinates33);
-    }
-    
+    protected Either<IllegalArgumentException, Robot> init = Either.right(new Robot(Robot.Status.ALIVE, coordinate11, surface, northOrientation()));
 }

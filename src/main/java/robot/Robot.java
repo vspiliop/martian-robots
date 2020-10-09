@@ -1,71 +1,70 @@
 package robot;
 
-import io.vavr.control.Option;
+import io.vavr.control.Either;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import mars.CartesianCoordinates;
 import mars.MarsSurface;
 import robot.actions.Orientation;
 
-import java.util.function.Consumer;
+import java.util.function.Function;
 
+import static io.vavr.API.*;
+import static io.vavr.Patterns.$Left;
+import static io.vavr.Patterns.$Right;
+
+/**
+ * An immutable implementation of Robot.
+ */
 @RequiredArgsConstructor
-public class Robot {
+final public class Robot {
 
     public enum Status {
         LOST, ALIVE
     }
 
     @Getter
-    private Status status = Status.ALIVE;
+    private final Status status;
 
-    @NonNull
     @Getter
-    private CartesianCoordinates coordinates;
+    private final CartesianCoordinates coordinates;
 
+    @Getter
     private final MarsSurface surface;
 
-    @NonNull
     @Getter
-    private Orientation orientation;
+    private final Orientation orientation;
 
-    public Option.None execute(Consumer<Robot> instructions) {
-        instructions.accept(this);
-        return (Option.None) Option.none();
+    public Either<IllegalArgumentException, Robot> execute(
+            Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>> instructions) {
+        return instructions.apply(Either.right(this));
     }
 
-    public void turnLeft() {
-        orientation = getOrientation().left();
+    public Either<IllegalArgumentException, Robot> turnLeft() {
+        return Either.right(new Robot(status, coordinates, surface, getOrientation().left()));
     }
 
-    public void turnRight() {
-        orientation = getOrientation().right();
+    public Either<IllegalArgumentException, Robot> turnRight() {
+        return Either.right(new Robot(status, coordinates, surface, getOrientation().right()));
     }
 
-    public void forward() {
+    public Either<IllegalArgumentException, Robot> forward() {
+
         if (status == Status.LOST)
-            return;
+            return Either.right(this);
 
-        CartesianCoordinates newCoordinates = getOrientation().forward(this);
+        final var newCoordinates = getOrientation().forward(this);
 
-        boolean isNextCoordinateValid = isValidCoordinate(newCoordinates);
-
-        if(!isNextCoordinateValid && isScentOnTheSurface()) {
-            return;
-        }
-
-        if(!isNextCoordinateValid) {
-            leaveScentOnSurface();
-            status = Status.LOST;
-            return;
-        }
-
-        coordinates = newCoordinates;
+        return Match(newCoordinates).of(
+                Case($Left($()), e -> Either.left(e)),
+                Case($Right($(c -> !isValidCoordinate(c) && isScentOnTheSurface())), () -> Either.right(this)),
+                Case($Right($(c -> !isValidCoordinate(c))),  () -> Either.right(new Robot(Status.LOST, coordinates, leaveScentOnSurface(), getOrientation()))),
+                Case($Right($()), nc -> Either.right(new Robot(Status.ALIVE, nc, surface, getOrientation())))
+        );
     }
 
-    private void leaveScentOnSurface() {
-        surface.leaveScent(getCoordinates());
+    private MarsSurface leaveScentOnSurface() {
+        return surface.leaveScent(getCoordinates());
     }
 
     private boolean isScentOnTheSurface() {

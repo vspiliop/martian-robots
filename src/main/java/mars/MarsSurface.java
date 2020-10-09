@@ -1,35 +1,48 @@
 package mars;
 
+import io.vavr.collection.HashSet;
 import lombok.Getter;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 /**
- * Represents the surface of Mars as a rectangular and is shared by all Robots.
- *
- * All robot commands are executed in sequence and there is no concurrency based on the problem definition,
- * and as a result there are no race conditions to guard against.
+ * An immutable implementation of the mars surface.
  */
-public class MarsSurface {
+final public class MarsSurface {
 
-    final private HashMap<CartesianCoordinates, Object> scent = new HashMap<>();
+    private HashSet scents = HashSet.empty();
 
+    /**
+     * We are leaking this reference but it is final and the CartesianCoordinates obj is immutable.
+     */
     @Getter
     private final CartesianCoordinates lowerBound = CartesianCoordinates.from(0, 0).getOrElseThrow(t -> t);
 
+    /**
+     * We are leaking this reference but it is final and the CartesianCoordinates obj is immutable.
+     */
     @Getter
-    private CartesianCoordinates upperBound;
+    private final CartesianCoordinates upperBound;
+
+    public MarsSurface(CartesianCoordinates upperBound, HashSet scents) {
+        this.upperBound = Optional.ofNullable(upperBound).orElseThrow(() -> new IllegalArgumentException("Mars Surface must have an upper bound"));
+        this.scents = Optional.ofNullable(scents).orElseThrow(() -> new IllegalArgumentException("Mars Surface must has scents"));
+    }
 
     public MarsSurface(CartesianCoordinates upperBound) {
         this.upperBound = Optional.ofNullable(upperBound).orElseThrow(() -> new IllegalArgumentException("Mars Surface must have an upper bound"));
     }
 
     public boolean hasScent(CartesianCoordinates coordinates) {
-        return scent.containsKey(coordinates);
+        return scents.contains(coordinates);
     }
 
-    public void leaveScent(CartesianCoordinates coordinates) {
-        scent.put(coordinates, null);
+    /**
+     * Whenever a MarsSurface is mutated via calling leaveScent(), a new instance is created.
+     * leaveScent() is the only way MarsSurface can be mutated.
+     * As a result MarsSurface is immutable.
+     */
+    public MarsSurface leaveScent(CartesianCoordinates coordinates) {
+        return new MarsSurface(upperBound, scents.add(coordinates));
     }
 }
