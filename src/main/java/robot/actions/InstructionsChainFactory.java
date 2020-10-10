@@ -15,7 +15,7 @@ import static robot.actions.turning.TurnLeftInstruction.leftInstruction;
 import static robot.actions.turning.TurnRightInstruction.rightInstruction;
 
 /**
- * Creates a chain of Either<IllegalArgumentException, Robot>(s). It is an Either as a command execution may fail.
+ * Creates a chain of Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>>(s) chained via Function::andThen.
  */
 public class InstructionsChainFactory {
     public static Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>> instructionChain(String line) {
