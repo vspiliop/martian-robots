@@ -7,8 +7,9 @@ OO design but with a functional twist :-)
  - Object Oriented design for the `Robot`, `MarsSurface`, `Orientation` and `Cartesian Coordinates`.
  - For `MarsSurface` a purely functional and immutable HashSet is used from `Vavr`. 
  - `Robot`, `MarsSurface`, `Orientation` and `Cartesian Coordinates` are immutable and threadsafe.
- - An `InstructionChain` are chained `Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>>` functions via `andThen()`. 
- The execution of such a function yields either a new `Robot` or an `IllegalArgumentException` (aka `Either<IllegalArgumentException, Robot>`).
+ - Models an instruction as a `Function` that takes a `Robot` (or in case of an already failed execution of a previous instruction, an `IllegalArgumentException`) and returns a new `Robot` or an `IllegalArgumentException`, if the current executing command failed or a previous one did.
+ - Specifically, an instruction is defined as `Function<Either<IllegalArgumentException, Robot>, Either<IllegalArgumentException, Robot>>`.
+ - `InstructionChain` are chained such instructions via `andThen()`.
 
 ## The Problem
 
